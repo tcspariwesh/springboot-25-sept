@@ -16,14 +16,14 @@ import jakarta.validation.Valid;
 @RestController
 public class OrderController {//singleton
 	@Autowired
-	IOrderService orderService;
+	IOrderService orderService;  //inject
 	@PostMapping("/order")
-	void createOrder(@Valid @RequestBody Order order) {
+	void createOrder(@Valid @RequestBody Orders order) {
 		System.out.println(order.getItem());
 		orderService.saveOrder(order);
 	}
 	@GetMapping("/order")
-	List<Order> getOrders(){
+	List<Orders> getOrders(){
 		return null;
 	}
 }
