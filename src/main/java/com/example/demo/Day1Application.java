@@ -12,6 +12,7 @@ public class Day1Application {
 		//bean,ddd
 		OrderController controller= context.getBean(OrderController.class);
 		System.out.println(controller);
+//		controller.createOrder(); //never
 	}
 
 }
