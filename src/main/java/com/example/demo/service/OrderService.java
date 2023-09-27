@@ -38,7 +38,7 @@ public class OrderService implements IOrderService {
 				// rethrow
 			}
 		logger.debug("saved successfully");
-		// db operation
+		// another db operation
 	}
 
 	@Override
@@ -49,5 +49,10 @@ public class OrderService implements IOrderService {
 	@Override
 	public Orders getOrders(Integer id) {
 		return repository.findById(id).get();
+	}
+
+	@Override
+	public void deleteOrders(Integer id) {
+		repository.deleteById(id);
 	}
 }

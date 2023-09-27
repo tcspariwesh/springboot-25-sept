@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,7 +51,10 @@ public class OrderController {// singleton, dependent
 	Orders getOrders(@PathVariable Integer id) {
 		return orderService.getOrders(id);
 	}
-
+	@DeleteMapping("/{id}")
+	void deleteOrders(@PathVariable Integer id) {
+		orderService.deleteOrders(id);
+	}
 	
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
