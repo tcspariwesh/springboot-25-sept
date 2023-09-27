@@ -6,9 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 @Entity
 
 public class Orders {
@@ -28,6 +31,16 @@ public class Orders {
 	Date cratedDate;
 	@Email(message = "email is invalid")
 	String email;
+	@NotBlank
+	@Pattern(regexp = "^\\d{10}$", message = "invalid number")
+//	@Transient
+	String mobile;
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	public String getEmail() {
 		return email;
 	}

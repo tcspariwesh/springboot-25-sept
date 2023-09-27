@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +35,18 @@ public class OrderController {//singleton, dependent
 	@ResponseStatus(code = HttpStatus.CREATED)
 	void createOrder(@Valid @RequestBody Orders order) {
 		logger.info(order.getItem());
-		orderService.saveOrder(order);
+		try {
+			orderService.saveOrder(order);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		bean.callme();
 	}
 	@GetMapping("/order")
 	List<Orders> getOrders(){
 		return null;
 	}
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception){
 		Map<String , String> errorMessages = new HashMap<>();
@@ -52,5 +58,10 @@ public class OrderController {//singleton, dependent
 			errorMessages.put(fieldName, errorMessage);
 		});
 		return errorMessages;
+	}
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+	String handleAllexceptions(Exception ex){
+		return ex.getMessage();
 	}
 }
