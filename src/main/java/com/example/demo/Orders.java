@@ -6,9 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 @Entity
+
 public class Orders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +26,14 @@ public class Orders {
 	@Min(value = 1, message = "Price cannot be negative")
 	float price;
 	Date cratedDate;
+	@Email(message = "email is invalid")
+	String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public Date getCratedDate() {
 		return cratedDate;
 	}
