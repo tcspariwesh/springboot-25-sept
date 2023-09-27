@@ -7,7 +7,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,7 +51,13 @@ public class OrderService implements IOrderService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteOrders(Integer id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public Orders getOrdersByMobile(String mobile) {
+		return repository.findByMobile(mobile);
 	}
 }

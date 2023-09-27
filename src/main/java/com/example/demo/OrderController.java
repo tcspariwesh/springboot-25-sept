@@ -51,6 +51,10 @@ public class OrderController {// singleton, dependent
 	Orders getOrders(@PathVariable Integer id) {
 		return orderService.getOrders(id);
 	}
+	@GetMapping("/mobile/{mobile}")
+	Orders getOrdersByMobile(@PathVariable String mobile) {
+		return orderService.getOrdersByMobile(mobile);
+	}
 	@DeleteMapping("/{id}")
 	void deleteOrders(@PathVariable Integer id) {
 		orderService.deleteOrders(id);

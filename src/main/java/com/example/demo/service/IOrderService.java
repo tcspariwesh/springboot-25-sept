@@ -12,4 +12,6 @@ public interface IOrderService {
 	Orders getOrders(Integer id);
 
 	void deleteOrders(Integer id);
+
+	Orders getOrdersByMobile(String mobile);
 }

@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,8 +13,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-@Entity
-
+@Entity(name = "Order1")
 public class Orders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +27,14 @@ public class Orders {
 	@NotBlank(message = "Item name cannot be blank.")
 	String item;
 	@Min(value = 1, message = "Price cannot be negative")
+	@Column(name = "cost")
 	float price;
 	Date cratedDate;
 	@Email(message = "email is invalid")
 	String email;
 	@NotBlank
 	@Pattern(regexp = "^\\d{10}$", message = "invalid number")
+	@Column( unique = true)
 //	@Transient
 	String mobile;
 	public String getMobile() {
