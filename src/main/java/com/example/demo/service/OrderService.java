@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,23 +13,41 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.IOrderRepository;
 import com.example.demo.Orders;
+
 @Service
 public class OrderService implements IOrderService {
 	@Autowired
 	IOrderRepository repository;
-	Logger logger  = LoggerFactory.getLogger(getClass());
+	Logger logger = LoggerFactory.getLogger(getClass());
+
 	public OrderService() {
 		System.out.println("Order service bean initializing");
 	}
+
 	@Override
-	@Transactional(rollbackFor = {Exception.class}, noRollbackFor = {IOException.class})
-	public void saveOrder(Orders order) throws IOException {
+	@Transactional(rollbackFor = { Exception.class })
+	public void saveOrder(Orders order) {
 		order.setCratedDate(new Date());
 		repository.save(order);
 		System.out.println(order.getItem());
-		if(1==1)
-			throw new IOException("something went wrong");
+		if (1 == 1)
+			try {// never handle any exception in service class
+				throw new IOException("something went wrong");
+			} catch (IOException e) {
+				e.printStackTrace();
+				// rethrow
+			}
 		logger.debug("saved successfully");
-		//db operation
+		// db operation
+	}
+
+	@Override
+	public List<Orders> getOrders() {
+		return repository.findAll();
+	}
+
+	@Override
+	public Orders getOrders(Integer id) {
+		return repository.findById(id).get();
 	}
 }

@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
-import java.io.IOException;
-
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.example.demo.Orders;
 
 public interface IOrderService {
-	 void saveOrder(Orders order) throws IOException;
+	 void saveOrder(Orders order) ;
+
+	List<Orders> getOrders();
+
+	Orders getOrders(Integer id);
 }
