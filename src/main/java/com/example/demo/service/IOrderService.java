@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.Orders;
 
 public interface IOrderService {
-	 void saveOrder(Orders order) ;
+	void saveOrder(Orders order);
 
 	List<Orders> getOrders();
 

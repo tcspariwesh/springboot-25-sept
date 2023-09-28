@@ -2,11 +2,16 @@ package com.example.demo;
 
 import java.util.Date;
 
+import com.example.demo.entity.Address;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -29,7 +34,7 @@ public class Orders {
 	@Min(value = 1, message = "Price cannot be negative")
 	@Column(name = "cost")
 	float price;
-	Date cratedDate;
+	Date createdDate;
 	@Email(message = "email is invalid")
 	String email;
 	@NotBlank
@@ -37,6 +42,15 @@ public class Orders {
 	@Column( unique = true)
 //	@Transient
 	String mobile;
+	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="address_id")
+	Address address;
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	public String getMobile() {
 		return mobile;
 	}
@@ -49,11 +63,11 @@ public class Orders {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getCratedDate() {
-		return cratedDate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCratedDate(Date cratedDate) {
-		this.cratedDate = cratedDate;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 	public String getItem() {
 		return item;

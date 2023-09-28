@@ -26,16 +26,15 @@ public class OrderService implements IOrderService {
 	@Override
 	@Transactional(rollbackFor = { Exception.class })
 	public void saveOrder(Orders order) {
-		order.setCratedDate(new Date());
-		repository.save(order);
+		order.setCreatedDate(new Date());
 		System.out.println(order.getItem());
-		if (1 == 1)
-			try {// never handle any exception in service class
-				throw new IOException("something went wrong");
-			} catch (IOException e) {
-				e.printStackTrace();
-				// rethrow
-			}
+		/*
+		 * if (1 == 1) try {// never handle any exception in service class throw new
+		 * IOException("something went wrong"); } catch (IOException e) {
+		 * e.printStackTrace(); // rethrow }
+		 */
+//		repository.deleteById(1);
+		repository.save(order);
 		logger.debug("saved successfully");
 		// another db operation
 	}
